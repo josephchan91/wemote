@@ -14,8 +14,10 @@ function loadYouTubePlayer() {
     params,
     atts
   );
+  $('body').css('background-color', 'red');
 }
 
 function onYouTubePlayerReady(playerId) {
-  ytplayer = document.getElementById("myytplayer");
+  ytplayer = document.getElementById("ytapiplayer");
+  ytplayer.play();
 }

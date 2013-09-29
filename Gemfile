@@ -12,6 +12,10 @@ group :development, :test do
     gem 'guard-spork'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'google-api-client'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
