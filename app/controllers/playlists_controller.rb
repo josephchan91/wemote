@@ -10,10 +10,22 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.new(playlist_params)
+    @playlist.tracks = []
     if @playlist.save
       redirect_to playlist_path(@playlist)
     else
       render :new
+    end
+  end
+
+  def update
+    @track_id = params[:track_id]
+    playlist = Playlist.find(params[:playlist_id])
+    playlist.tracks += [@track_id]
+    playlist.save
+    respond_to do |format|
+      format.html { redirect_to playlist_path(playlist) }
+      format.js
     end
   end
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Playlist do
 
-  before { @playlist = Playlist.new(name: "Example Playlist") }
+  before { @playlist = Playlist.new(name: "Example Playlist", tracks: []) }
 
   subject { @playlist }
 

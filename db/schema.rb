@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20130929030908) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tracks",     array: true
   end
 
 end

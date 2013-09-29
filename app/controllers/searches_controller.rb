@@ -3,9 +3,7 @@ require 'google/api_client'
 class SearchesController < ApplicationController
   def index
     @playlist = Playlist.find(params[:playlist_id])
-    unless params[:search].present?
-      render "playlists/show"
-    else
+    if params[:search].present?
       @query = params[:search]
 
       client = Google::APIClient.new(
@@ -18,9 +16,12 @@ class SearchesController < ApplicationController
         parameters: {
           part: 'id,snippet',
           q: @query,
-          maxResults: 10
+          maxResults: 10,
+          type: 'video'
         }
       )
+    else
+      render "playlists/show"
     end
   end
 end
