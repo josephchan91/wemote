@@ -1,3 +1,13 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      loadYouTubePlayer();
+    });
+  </script>
+<% end %>
+<div id="ytapiplayer">
+    You need Flash player 8+ and JavaScript enabled to view this video.
+</div>
 <% provide :title, @playlist.name %>
-<%= @playlist.id %>
+Playlist: <%= @playlist.name %>
 <%= render 'shared/find_song', playlist_id: @playlist.id %>
