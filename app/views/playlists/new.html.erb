@@ -1,0 +1,7 @@
+<%  provide :title, 'Create Playlist' %>
+
+<%= form_for(@playlist) do |f| %>
+    <%= f.label :name, 'Playlist Name' %>
+    <%= f.text_field :name %>
+    <%= f.submit "Create playlist" %>
+<% end %>

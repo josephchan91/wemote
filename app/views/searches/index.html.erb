@@ -1,0 +1,5 @@
+Search results for <%= @query %><br>
+<%= render 'shared/find_song', playlist_id: @playlist.id %>
+<% @results.data.items.each do |result| %>
+    <img src="<%= result.snippet.thumbnails.default.url %>"><br>
+<% end %>
