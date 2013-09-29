@@ -3,7 +3,7 @@ function loadYouTubePlayer() {
   var atts = { id: "myytplayer" };
   // change this url later, it's pointing to a kanye west video
   var url = "http://www.youtube.com/v/x36nVPJWVdk?enablejsapi=1&playerapiid=ytplayer&version=3";
-  $('body').css('background-color', 'red');
+  console.log(swfobject);
   swfobject.embedSWF(
     url,
     "ytapiplayer",
