@@ -1,14 +1,14 @@
+<% provide :title, @playlist.name %>
+Playlist: <%= @playlist.name %>
 <% content_for :head do %>
   <%= javascript_include_tag 'swfobject' %>
+  <%= javascript_include_tag 'jquery.cookie' %>
   <script type="text/javascript">
     $(function() {
       loadYouTubePlayer();
     });
   </script>
 <% end %>
-<div id="ytapiplayer">
+<div id="ytplayercontainer">
     You need Flash player 8+ and JavaScript enabled to view this video.
 </div>
-<% provide :title, @playlist.name %>
-Playlist: <%= @playlist.name %>
-<%= render 'shared/find_song', playlist_id: @playlist.id %>

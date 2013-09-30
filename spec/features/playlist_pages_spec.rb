@@ -38,9 +38,9 @@ describe "Playlist pages" do
     end
   end
 
-  describe "showing a playlist" do
+  describe "searching to add to a playlist" do
     let(:playlist) { FactoryGirl.create(:playlist) }
-    before { visit playlist_path(playlist) }
+    before { visit search_playlist_path(playlist) }
 
     describe "should show search button" do
       it { should have_content('Find a song') }

@@ -1,3 +1,4 @@
+
 Wemote::Application.routes.draw do
   get "searches/index"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -5,7 +6,11 @@ Wemote::Application.routes.draw do
 
   root 'playlists#new'
 
-  resources :playlists
+  resources :playlists do
+    get 'search', on: :member
+    get 'next_track', on: :member
+  end
+  
   resources :searches, only: [:index]
 
   # Example of regular route:

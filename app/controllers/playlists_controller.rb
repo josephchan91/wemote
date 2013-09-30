@@ -2,6 +2,7 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
+    cookies[:current_playlist_id] = @playlist.id
   end
 
   def new
@@ -21,12 +22,25 @@ class PlaylistsController < ApplicationController
   def update
     @track_id = params[:track_id]
     playlist = Playlist.find(params[:playlist_id])
-    playlist.tracks += [@track_id]
-    playlist.save
+    playlist.push(@track_id)
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
       format.js
     end
+  end
+
+  def search
+    @playlist = Playlist.find(params[:id])
+  end
+
+  def next_track
+    playlist = Playlist.find(params[:id])
+    next_track_id = playlist.pop
+    respond_to do |format|
+      format.json { render json: {
+        next_track_id: next_track_id
+      } }
+    end unless next_track_id.nil?
   end
 
   private 
