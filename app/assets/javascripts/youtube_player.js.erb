@@ -40,6 +40,7 @@ function loadYouTubePlayer() {
 }
 
 function onYouTubePlayerStateChange(newState) {
+  console.log("player state: " + newState)
   if (newState === 0) {
     loadNextTrack();
   }
@@ -53,6 +54,12 @@ function onYouTubePlayerReady(playerId) {
   var channel = pusher.subscribe(playlistId);
   channel.bind('track_added', function(data) {
     console.log('track added');
-    loadNextTrack();
+    playerState = ytplayer.getPlayerState();
+    if (playerState === -1 || playerState === 0) {
+      console.log('loading next track since state was unstarted')
+      loadNextTrack();
+    }
   });
+
+  loadNextTrack();
 }
