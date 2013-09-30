@@ -1,5 +1,3 @@
-require 'pusher'
-
 class PlaylistsController < ApplicationController
 
   def show
@@ -27,10 +25,6 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.find(playlist_id)
     playlist.push(@track_id)
     if playlist.length == 1
-        # Pusher stuff.
-      Pusher.app_id = 55371
-      Pusher.key = 'c45d65e611bfd1c39e44'
-      Pusher.secret = '08acc28bcb6b07ade5f6'
       Pusher.trigger(playlist_id, 'track_added', {})
     end
     respond_to do |format|
