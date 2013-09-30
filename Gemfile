@@ -14,6 +14,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'thin'
 end
 
 gem 'google-api-client'
