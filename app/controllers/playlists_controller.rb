@@ -25,6 +25,7 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.find(playlist_id)
     playlist.push(@track_id)
     if playlist.length == 1
+      Pusher.url = "http://c45d65e611bfd1c39e44:08acc28bcb6b07ade5f6@api.pusherapp.com/apps/55371"
       Pusher.trigger(playlist_id, 'track_added', {})
     end
     respond_to do |format|
