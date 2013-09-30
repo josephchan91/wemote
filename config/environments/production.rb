@@ -1,12 +1,4 @@
-require 'pusher'
-
 Wemote::Application.configure do
-
-  # Pusher stuff.
-  Pusher.app_id = 55371
-  Pusher.key = 'c45d65e611bfd1c39e44'
-  Pusher.secret = '08acc28bcb6b07ade5f6'
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
