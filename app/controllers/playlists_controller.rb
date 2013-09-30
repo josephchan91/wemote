@@ -27,7 +27,7 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.find(playlist_id)
     playlist.push(@track_id)
     if playlist.length == 1
-      Pusher['1'].trigger('track_added', {})
+      Pusher[playlist_id].trigger('track_added', {})
     end
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
