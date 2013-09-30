@@ -1,10 +1,10 @@
 // connect to server like normal
 // var dispatcher = new WebSocketRails(window.location.host);
 
-var dispatcher;
+var pusher;
 
 $(function() {
-  dispatcher = new WebSocketRails(window.location.host + '/websocket');
+  pusher = new Pusher('c45d65e611bfd1c39e44');
   loadYouTubePlayer();
 });
 
@@ -50,8 +50,7 @@ function onYouTubePlayerReady(playerId) {
   ytplayer.addEventListener("onStateChange", "onYouTubePlayerStateChange");
 
   var playlistId = $.cookie('current_playlist_id');
-
-  var channel = dispatcher.subscribe(playlistId);
+  var channel = pusher.subscribe(playlistId);
   channel.bind('track_added', function(data) {
     console.log('track added');
     loadNextTrack();

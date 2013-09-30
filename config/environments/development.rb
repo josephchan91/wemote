@@ -1,4 +1,12 @@
+require 'pusher'
+
 Wemote::Application.configure do
+
+  # Pusher stuff.
+  Pusher.app_id = 55371
+  Pusher.key = 'c45d65e611bfd1c39e44'
+  Pusher.secret = '08acc28bcb6b07ade5f6'
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,7 +34,4 @@ Wemote::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-
-  # websocket-rails
-  config.middleware.delete Rack::Lock
 end

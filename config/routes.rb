@@ -1,4 +1,3 @@
-
 Wemote::Application.routes.draw do
   get "searches/index"
   # The priority is based upon order of creation: first created -> highest priority.

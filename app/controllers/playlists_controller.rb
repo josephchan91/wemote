@@ -1,3 +1,5 @@
+require 'pusher'
+
 class PlaylistsController < ApplicationController
 
   def show
@@ -25,7 +27,7 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.find(playlist_id)
     playlist.push(@track_id)
     if playlist.length == 1
-      WebsocketRails[playlist_id].trigger(:track_added, nil)
+      Pusher[playlist_id.to_s].trigger('track_added', nil)
     end
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
