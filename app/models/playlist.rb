@@ -14,4 +14,8 @@ class Playlist < ActiveRecord::Base
     update_attributes tracks: tracks
     next_track_id
   end
+
+  def length
+    tracks.length
+  end
 end

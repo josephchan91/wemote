@@ -3,11 +3,7 @@ Playlist: <%= @playlist.name %>
 <% content_for :head do %>
   <%= javascript_include_tag 'swfobject' %>
   <%= javascript_include_tag 'jquery.cookie' %>
-  <script type="text/javascript">
-    $(function() {
-      loadYouTubePlayer();
-    });
-  </script>
+  <%= javascript_include_tag 'youtube_player' %>
 <% end %>
 <div id="ytplayercontainer">
     You need Flash player 8+ and JavaScript enabled to view this video.

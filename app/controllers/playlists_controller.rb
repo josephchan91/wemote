@@ -21,8 +21,12 @@ class PlaylistsController < ApplicationController
 
   def update
     @track_id = params[:track_id]
-    playlist = Playlist.find(params[:playlist_id])
+    playlist_id = params[:playlist_id]
+    playlist = Playlist.find(playlist_id)
     playlist.push(@track_id)
+    if playlist.length == 1
+      WebsocketRails[playlist_id].trigger(:track_added, nil)
+    end
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
       format.js
