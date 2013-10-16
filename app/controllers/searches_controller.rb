@@ -14,7 +14,7 @@ class SearchesController < ApplicationController
       @results = client.execute!(
         api_method: youtube.search.list,
         parameters: {
-          part: 'id,snippet',
+          part: 'id, snippet',
           q: @query,
           maxResults: 10,
           type: 'video'
