@@ -12,5 +12,14 @@ Search results for <%= @query %><br>
         <%= hidden_field_tag :playlist_id, @playlist.id %>
         <%= submit_tag "Add to Playlist", name: nil %>
     <% end %>
+    <%= form_tag playlist_path(@playlist),
+                 method: 'patch',
+                 remote: true,
+                 name: result.id.videoId do %>
+        <%= hidden_field_tag :query, @query %>
+        <%= hidden_field_tag :track_id, result.id.videoId %>
+        <%= hidden_field_tag :playlist_id, @playlist.id %>
+        <%= submit_tag "Play Now!", name: nil %>
+    <% end %>
     <br>
 <% end %>
