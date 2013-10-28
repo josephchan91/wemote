@@ -1,9 +1,9 @@
 @import "foundation_and_overrides";
 
 .search-result {
-    background-color: #F9F9F9;
+    background-color: #F2F2F2;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .no-margin {
@@ -14,6 +14,21 @@
     display: inline;
 }
 
+.float-left {
+    float: left;
+}
+
 .video-title {
     color: $primary-color;
+}
+
+.video-info {
+    margin-left: 210px;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }

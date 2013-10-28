@@ -1,11 +1,21 @@
 <% provide :title, @playlist.name %>
-<h4>Playlist: <%= @playlist.name %></h4><br>
-<% content_for :head do %>
-  <%= javascript_include_tag 'swfobject' %>
-  <%= javascript_include_tag 'jquery.cookie' %>
-  <%= javascript_include_tag 'youtube_player' %>
-  <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
-<% end %>
-<div id="ytplayercontainer">
-    You need Flash player 8+ and JavaScript enabled to view this video.
+<div class="row">
+  <div class="large-6 large-centered columns">
+    <div class="playlist-container">
+      <h4>Playlist: <%= @playlist.name %></h4>
+
+      <h6>Share this link with friends:</h6>
+      <%= URI.join(root_url, search_playlist_path(@playlist.id)) %><br><br>
+
+      <% content_for :head do %>
+        <%= javascript_include_tag 'swfobject' %>
+        <%= javascript_include_tag 'jquery.cookie' %>
+        <%= javascript_include_tag 'youtube_player' %>
+        <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+      <% end %>
+      <div id="ytplayercontainer" class="ytplayercontainer">
+          You need Flash player 8+ and JavaScript enabled to view this video.
+      </div>
+    </div>
+  </div>
 </div>

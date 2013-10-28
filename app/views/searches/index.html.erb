@@ -4,13 +4,13 @@
 <% @results.data.items.each do |result| %>
     <div class="row search-result">
         <div class="row">
-            <div class="small-4 columns">
+            <div class="small-6 columns">
                 <img src="<%= result.snippet.thumbnails.default.url %>">
             </div>
-            <div class="small-8 columns">            
-                <h5 class="video-title"><%= result.snippet.title %></h5>
-                <h6><%= result.statistics.viewCount %> views</h6>
-                <h6>Rating: <%= rating_percentage(result.statistics.likeCount, result.statistics.dislikeCount)%></h6>
+            <div class="small-6 columns">
+                <span class="video-title"><%= result.snippet.title %></span><br>
+                <span><%= result.statistics.viewCount %> views</span><br>
+                <span>Rating: <%= rating_percentage(result.statistics.likeCount, result.statistics.dislikeCount)%></span>
             </div>
         </div>
         <div class="row"><div class="small-12 columns">
