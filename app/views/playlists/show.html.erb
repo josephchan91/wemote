@@ -4,7 +4,7 @@
     <div class="playlist-container">
       <h4 class="color-primary"><%= @playlist.name %></h4>
 
-      <b>Share this link with your friends:</b>
+      <b>Share this link with your friends:</b><br>
       <%= URI.join(root_url, search_playlist_path(@playlist.id)) %><br><br>
 
       <% content_for :head do %>
