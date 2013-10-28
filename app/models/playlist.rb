@@ -3,12 +3,18 @@ class Playlist < ActiveRecord::Base
   validates :tracks, presence: true,
     unless: Proc.new { |p| p.tracks != nil && p.tracks.empty? }
 
-  def push(track_id)
+  def push_track(track_id)
     tracks_will_change!
     update_attributes tracks: tracks.push(track_id)
   end
 
-  def pop
+  def unshift_track(track_id)
+    tracks_will_change!
+    update_attributes tracks: tracks.unshift(track_id)
+  end
+
+
+  def pop_track
     tracks_will_change!
     next_track_id = tracks.shift
     update_attributes tracks: tracks

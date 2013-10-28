@@ -1,5 +1,5 @@
 <% provide :title, @playlist.name %>
-Playlist: <%= @playlist.name %>
+<h4>Playlist: <%= @playlist.name %></h4><br>
 <% content_for :head do %>
   <%= javascript_include_tag 'swfobject' %>
   <%= javascript_include_tag 'jquery.cookie' %>

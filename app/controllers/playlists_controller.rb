@@ -23,9 +23,14 @@ class PlaylistsController < ApplicationController
     @track_id = params[:track_id]
     playlist_id = params[:playlist_id]
     playlist = Playlist.find(playlist_id)
-    playlist.push(@track_id)
-    if playlist.length == 1
-      Pusher.trigger(playlist_id, 'track_added', {})
+    unless params[:play_now] then
+      playlist.push_track(@track_id)
+      if playlist.length == 1
+        Pusher.trigger(playlist_id, 'track_added', {})
+      end
+    else
+      playlist.unshift_track(@track_id)
+      Pusher.trigger(playlist_id, 'play_next_track_now', {})
     end
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
@@ -39,7 +44,7 @@ class PlaylistsController < ApplicationController
 
   def next_track
     playlist = Playlist.find(params[:id])
-    next_track_id = playlist.pop
+    next_track_id = playlist.pop_track
     respond_to do |format|
       format.json { render json: {
         next_track_id: next_track_id

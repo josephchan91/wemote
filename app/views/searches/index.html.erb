@@ -1,25 +1,40 @@
-Search results for <%= @query %><br>
+<h4>Search results for <%= @query %><br></h4>
 <%= render 'shared/find_song', playlist_id: @playlist.id %>
+
 <% @results.data.items.each do |result| %>
-    <img src="<%= result.snippet.thumbnails.default.url %>">
-    <%= result.snippet.title %><br>
-    <%= form_tag playlist_path(@playlist),
-                 method: 'patch',
-                 remote: true,
-                 name: result.id.videoId do %>
-        <%= hidden_field_tag :query, @query %>
-        <%= hidden_field_tag :track_id, result.id.videoId %>
-        <%= hidden_field_tag :playlist_id, @playlist.id %>
-        <%= submit_tag "Add to Playlist", name: nil %>
-    <% end %>
-    <%= form_tag playlist_path(@playlist),
-                 method: 'patch',
-                 remote: true,
-                 name: result.id.videoId do %>
-        <%= hidden_field_tag :query, @query %>
-        <%= hidden_field_tag :track_id, result.id.videoId %>
-        <%= hidden_field_tag :playlist_id, @playlist.id %>
-        <%= submit_tag "Play Now!", name: nil %>
-    <% end %>
-    <br>
+    <div class="row search-result">
+        <div class="row">
+            <div class="small-4 columns">
+                <img src="<%= result.snippet.thumbnails.default.url %>">
+            </div>
+            <div class="small-8 columns">            
+                <h5 class="video-title"><%= result.snippet.title %></h5>
+                <h6><%= result.statistics.viewCount %> views</h6>
+                <h6>Rating: <%= rating_percentage(result.statistics.likeCount, result.statistics.dislikeCount)%></h6>
+            </div>
+        </div>
+        <div class="row"><div class="small-12 columns">
+            <%= form_tag playlist_path(@playlist),
+                         method: 'patch',
+                         remote: true,
+                         name: result.id,
+                         class: "no-margin inline" do %>
+                <%= hidden_field_tag :query, @query %>
+                <%= hidden_field_tag :track_id, result.id %>
+                <%= hidden_field_tag :playlist_id, @playlist.id %>
+                <%= submit_tag "Add to Playlist", name: nil, class: "tiny button no-margin" %>
+            <% end %>
+            <%= form_tag playlist_path(@playlist),
+                         method: 'patch',
+                         remote: true,
+                         name: result.id,
+                         class: "no-margin inline" do %>
+                <%= hidden_field_tag :play_now, true %>
+                <%= hidden_field_tag :query, @query %>
+                <%= hidden_field_tag :track_id, result.id %>
+                <%= hidden_field_tag :playlist_id, @playlist.id %>
+                <%= submit_tag "Play Now", name: nil, class: "tiny button no-margin"  %>
+            <% end %>
+        </div></div>
+    </div>
 <% end %>

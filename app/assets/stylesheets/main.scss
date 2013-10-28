@@ -1,0 +1,19 @@
+@import "foundation_and_overrides";
+
+.search-result {
+    background-color: #F9F9F9;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.inline {
+    display: inline;
+}
+
+.video-title {
+    color: $primary-color;
+}
