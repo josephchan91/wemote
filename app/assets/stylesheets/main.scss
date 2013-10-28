@@ -3,7 +3,7 @@
 .search-result {
     background-color: #F2F2F2;
     margin-bottom: 10px;
-    padding: 20px;
+    padding: 12px 0;
 }
 
 .no-margin {
@@ -18,10 +18,6 @@
     float: left;
 }
 
-.video-title {
-    color: $primary-color;
-}
-
 .video-info {
     margin-left: 210px;
 }
@@ -31,4 +27,8 @@ input, textarea {
   -moz-appearance: none;
   -webkit-border-radius: 0;
   border-radius: 0;
+}
+
+.color-primary {
+    color: $primary-color;
 }

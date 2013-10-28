@@ -1,3 +1,7 @@
 <% provide :title, @playlist.name %>
-Playlist: <%= 'Add to ' + @playlist.name %>
-<%= render 'shared/find_song', playlist_id: @playlist.id %>
+<div class="row search-playlist-container">
+  <div class="large-6 large-centered columns">
+    <h4>You are on the <span class="color-primary"><%= @playlist.name %></span> playlist.</h4>
+    <%= render 'shared/find_song', playlist_id: @playlist.id %>
+  </div>
+</div>
