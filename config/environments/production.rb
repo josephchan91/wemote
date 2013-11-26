@@ -2,14 +2,11 @@ require 'mail'
 
 Wemote::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = {
-    :host => "warm-spire-9278.herokuapp.com"
-  }
   Mail.defaults do
     delivery_method :smtp, {
       :address => 'smtp.sendgrid.net',
       :port => '587',
-      :domain => 'herokuapp.com',
+      :domain => 'heroku.com',
       :user_name => 'app18395829@heroku.com',
       :password => 'wdpmhn0t',
       :authentication => :plain,
