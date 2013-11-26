@@ -23,7 +23,10 @@
     <h6>Send to friends</h6>
     <%= form_tag playlist_invites_path, method: 'post', remote: true do %>
       <p>
-        <%= text_field_tag :email, params[:email], placeholder: "Enter email address" %>
+        <%= text_area_tag :invitee_emails,
+                          params[:invitee_emails],
+                          placeholder: "Enter email addresses",
+                          class: "invitee-emails" %>
         <%= submit_tag "Invite", name: nil, class: "small button"%>
       </p>
     <% end %>
