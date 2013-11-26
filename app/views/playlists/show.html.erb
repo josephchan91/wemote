@@ -27,6 +27,7 @@
                           params[:invitee_emails],
                           placeholder: "Enter email addresses",
                           class: "invitee-emails" %>
+        <%= hidden_field_tag :playlist_id, @playlist.id %>
         <%= submit_tag "Invite", name: nil, class: "small button"%>
       </p>
     <% end %>

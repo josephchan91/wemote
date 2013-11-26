@@ -4,9 +4,9 @@ require 'mail'
 Wemote::Application.configure do
 
   # Pusher stuff.
-  Pusher.app_id = 55371
-  Pusher.key = 'c45d65e611bfd1c39e44'
-  Pusher.secret = '08acc28bcb6b07ade5f6'
+  Pusher.app_id = ENV["PUSHER_APP_ID"]
+  Pusher.key    = ENV["PUSHER_KEY"]
+  Pusher.secret = ENV["PUSHER_SECRET"]
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -26,7 +26,6 @@ Wemote::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

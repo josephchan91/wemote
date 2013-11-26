@@ -8,12 +8,12 @@ Wemote::Application.configure do
   config.action_mailer.default_url_options = { :host => 'warm-spire-9278.herokuapp.com' }
   Mail.defaults do
     delivery_method :smtp, {
-      :address => 'smtp.sendgrid.net',
-      :port => '587',
-      :domain => 'heroku.com',
-      :user_name => 'app18395829@heroku.com',
-      :password => 'wdpmhn0t',
-      :authentication => :plain,
+      :address              => 'smtp.sendgrid.net',
+      :port                 => '587',
+      :domain               => 'heroku.com',
+      :user_name            => ENV['SENDGRID_USERNAME'],
+      :password             =>  ENV['SENDGRID_PASSWORD'],
+      :authentication       => :plain,
       :enable_starttls_auto => true
     }
   end

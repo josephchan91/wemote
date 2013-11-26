@@ -11,7 +11,7 @@
   <div class="large-4 columns">
     <h6>Previous Playlists:</h6>
     <% @past_playlists.each do |p| %>
-      <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %><br>
+      <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %>
     <% end %>
   </div>
 </div>
