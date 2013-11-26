@@ -9,7 +9,7 @@ Wemote::Application.configure do
     delivery_method :smtp, {
       :address => 'smtp.sendgrid.net',
       :port => '587',
-      :domain => 'warm-spire-9278.herokuapp.com',
+      :domain => 'herokuapp.com',
       :user_name => 'app18395829@heroku.com',
       :password => 'wdpmhn0t',
       :authentication => :plain,
