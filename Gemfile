@@ -10,12 +10,15 @@ group :development, :test do
     gem 'guard-rspec'
     gem 'spork-rails'
     gem 'guard-spork'
+    gem 'letter_opener'
 end
 
 group :production do
   gem 'rails_12factor'
   gem 'thin'
 end
+
+gem 'figaro'
 
 # Foundation
 gem 'compass-rails' # you need this or you get an err

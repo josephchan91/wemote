@@ -1,9 +1,17 @@
 <%  provide :title, 'Create Playlist' %>
 
-<div class="row new-playlist-container"><div class="large-6 large-centered columns">
-  <h3>Welcome to Wemote.</h3>
-  <%= form_for(@playlist) do |f| %>
-      <%= f.text_field :name, placeholder: "Enter a name for your new playlist" %>
-      <%= f.submit "Create Playlist", class: "button" %>
-  <% end %>
-</div></div>
+<div class="row new-playlist">
+  <div class="large-8 columns">
+    <h3>Welcome to Wemote.</h3>
+    <%= form_for(@playlist) do |f| %>
+        <%= f.text_field :name, placeholder: "Enter a name for your new playlist" %>
+        <%= f.submit "Create Playlist", class: "button" %>
+    <% end %>
+  </div>
+  <div class="large-4 columns">
+    <h6>Previous Playlists:</h6>
+    <% @past_playlists.each do |p| %>
+      <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %><br>
+    <% end %>
+  </div>
+</div>

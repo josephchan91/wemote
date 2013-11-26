@@ -1,17 +1,19 @@
 // Place all the styles related to the playlists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.new-playlist-container {
-    margin-top: 200px;
+.previous-playlists {
+    margin-top: 40px;
+}
+
+.new-playlist {
+    margin-top: 50px;
 }
 
 .search-playlist-container {
     margin-top: 100px;
 }
 
-.playlist-container {
-    margin-top: 40px;
-    background-color: #F3F3F3;
+.playlist {
     padding: 20px;
 }
 

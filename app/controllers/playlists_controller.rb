@@ -2,11 +2,14 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
-    cookies[:current_playlist_id] = @playlist.id
+    cookies[:playlist_ids] =
+      cookies[:playlist_ids].to_s.split(',').push(@playlist.id).join(',')
   end
 
   def new
     @playlist = Playlist.new
+    @past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
+    @past_playlists = Playlist.find(@past_playlist_ids)
   end
 
   def create

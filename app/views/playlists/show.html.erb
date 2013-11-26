@@ -1,21 +1,31 @@
 <% provide :title, @playlist.name %>
-<div class="row">
-  <div class="large-6 large-centered columns">
-    <div class="playlist-container">
-      <h4 class="color-primary"><%= @playlist.name %></h4>
+<%= javascript_tag do %>
+  window.currentPlaylistId = "<%= @playlist.id %>";
+<% end %>
+<div class="row playlist">
+  <div class="large-8 columns">
+    <h4 class="color-primary"><%= @playlist.name %></h4>
 
-      <b>Share this link with your friends:</b><br>
-      <%= URI.join(root_url, search_playlist_path(@playlist.id)) %><br><br>
+    <b>Share this link with your friends:</b><br>
+    <%= URI.join(root_url, search_playlist_path(@playlist.id)) %><br><br>
 
-      <% content_for :head do %>
-        <%= javascript_include_tag 'swfobject' %>
-        <%= javascript_include_tag 'jquery.cookie' %>
-        <%= javascript_include_tag 'youtube_player' %>
-        <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
-      <% end %>
-      <div id="ytplayercontainer" class="ytplayercontainer">
-          You need Flash player 8+ and JavaScript enabled to view this video.
-      </div>
+    <% content_for :head do %>
+      <%= javascript_include_tag 'swfobject' %>
+      <%= javascript_include_tag 'jquery.cookie' %>
+      <%= javascript_include_tag 'youtube_player' %>
+      <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+    <% end %>
+    <div id="ytplayercontainer" class="ytplayercontainer">
+        You need Flash player 8+ and JavaScript enabled to view this video.
     </div>
+  </div>
+  <div class="large-4 columns">
+    <h6>Send to friends</h6>
+    <%= form_tag playlist_invites_path, method: 'post', remote: true do %>
+      <p>
+        <%= text_field_tag :email, params[:email], placeholder: "Enter email address" %>
+        <%= submit_tag "Invite", name: nil, class: "small button"%>
+      </p>
+    <% end %>
   </div>
 </div>

@@ -12,6 +12,8 @@ Wemote::Application.routes.draw do
   
   resources :searches, only: [:index]
 
+  resources :playlist_invites, only: [:create]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

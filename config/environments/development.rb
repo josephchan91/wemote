@@ -22,7 +22,19 @@ Wemote::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  Mail.defaults do
+    delivery_method :smtp, {
+      :address => 'smtp.sendgrid.net',
+      :port => '587',
+      :domain => 'localhost:3000',
+      :user_name => 'app18395829@heroku.com',
+      :password => 'wdpmhn0t',
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
+  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

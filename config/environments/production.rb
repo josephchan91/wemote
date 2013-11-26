@@ -1,5 +1,18 @@
+require 'mail'
+
 Wemote::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  Mail.defaults do
+    delivery_method :smtp, {
+      :address => 'smtp.sendgrid.net',
+      :port => '587',
+      :domain => 'localhost:3000',
+      :user_name => 'app18395829@heroku.com',
+      :password => 'wdpmhn0t',
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
+  end
 
   # Code is not reloaded between requests.
   config.cache_classes = true
