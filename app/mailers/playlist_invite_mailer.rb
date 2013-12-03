@@ -8,7 +8,9 @@ class PlaylistInviteMailer < ActionMailer::Base
         recipients.push(email)
       end
     end
-    @playlist_link = url_for controller: 'playlists', action: 'search', id: playlist_id
-    mail to: recipients
+    @playlist_link = url_for controller: 'playlists',
+                             action: 'search',
+                             id: playlist_id
+    mail bcc: recipients
   end
 end

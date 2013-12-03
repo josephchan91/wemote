@@ -1,0 +1,9 @@
+<%= form_tag playlist_path(playlist),
+         method: 'patch',
+         remote: true,
+         class: "no-margin inline" do %>
+  <%= hidden_field_tag :track_id, track.id %>
+  <%= hidden_field_tag :playlist_id, playlist.id %>
+  <%= submit_tag "Remove", class: "tiny button" %>
+<% end %>
+<%= track.title %>

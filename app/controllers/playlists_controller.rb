@@ -2,6 +2,7 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
+    @tracks = Track.find_all_by_id(@playlist.tracks)
     cookies[:playlist_ids] =
       cookies[:playlist_ids].to_s.split(',').push(@playlist.id).join(',')
   end
@@ -23,18 +24,38 @@ class PlaylistsController < ApplicationController
   end
 
   def update
-    @track_id = params[:track_id]
+    youtube_id = params[:youtube_id]
     playlist_id = params[:playlist_id]
     playlist = Playlist.find(playlist_id)
-    unless params[:play_now] then
-      playlist.push_track(@track_id)
+
+    if params[:commit] == "Add to Playlist" then
+      track = Track.new(youtube_id: youtube_id, title: params[:track_title])
+      track.save
+      Pusher.trigger(playlist_id, 'track_added', {
+        track_id: track.id,
+        playlist_id: playlist_id
+      })
+
+      logger.debug "add to playlist"
+      playlist.push_track(track)
       if playlist.length == 1
-        Pusher.trigger(playlist_id, 'track_added', {})
+        Pusher.trigger(playlist_id, 'first_track_added', {})
       end
-    else
-      playlist.unshift_track(@track_id)
+    elsif params[:commit] == "Play Now"
+      track = Track.new(youtube_id: youtube_id, title: params[:track_title])
+      track.save
+
+      logger.debug "play now"
+      playlist.unshift_track(track)
       Pusher.trigger(playlist_id, 'play_next_track_now', {})
+    elsif params[:commit] == "Remove"
+      track = Track.find(params[:track_id])
+
+      logger.debug "remove"
+      playlist.remove_track(track)
+      Pusher.trigger(playlist_id, 'track_removed', {})
     end
+
     respond_to do |format|
       format.html { redirect_to playlist_path(playlist) }
       format.js
@@ -46,13 +67,27 @@ class PlaylistsController < ApplicationController
   end
 
   def next_track
-    playlist = Playlist.find(params[:id])
-    next_track_id = playlist.pop_track
+    playlist_id = params[:id]
+    playlist = Playlist.find(playlist_id)
+    next_youtube_id = playlist.pop_track.youtube_id
+    Pusher.trigger(playlist_id, 'track_removed', {})
+
     respond_to do |format|
-      format.json { render json: {
-        next_track_id: next_track_id
-      } }
-    end unless next_track_id.nil?
+      format.json {
+        render json: {
+          next_youtube_id: next_youtube_id
+        }
+      }
+    end unless next_youtube_id.nil?
+  end
+
+  def track_list
+    playlist_id = params[:id]
+    @playlist = Playlist.find(playlist_id)
+    @tracks = Track.find_all_by_id(@playlist.tracks)
+    respond_to do |format|
+      format.js
+    end unless @tracks.nil?
   end
 
   private 

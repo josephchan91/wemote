@@ -8,6 +8,7 @@ Wemote::Application.routes.draw do
   resources :playlists do
     get 'search', on: :member
     get 'next_track', on: :member
+    get 'track_list', on: :member
   end
   
   resources :searches, only: [:index]

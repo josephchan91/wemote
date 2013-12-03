@@ -26,7 +26,7 @@ function loadYouTubePlayer() {
   );
 }
 
-function onYouTubePlayerReady(playerId) {
+function onYouTubePlayerReady(playerIdface) {
   ytplayer = document.getElementById("ytplayer");
   ytplayer.addEventListener("onStateChange", "onYouTubePlayerStateChange");
 
@@ -34,6 +34,16 @@ function onYouTubePlayerReady(playerId) {
 
   channel.bind('track_added', function(data) {
     console.log('track added');
+    reloadTrackList();
+  });
+
+  channel.bind('track_removed', function(data) {
+    console.log('track removed');
+    reloadTrackList();
+  });
+
+  channel.bind('first_track_added', function(data) {
+    console.log('first track added');
     playerState = ytplayer.getPlayerState();
     if (playerState === -1 || playerState === 0) {
       console.log('loading next track since state was unstarted')
@@ -57,7 +67,16 @@ function loadNextTrack() {
   }).done(function(response) {
     console.log('received next track');
     ytplayer = document.getElementById("ytplayer");
-    ytplayer.loadVideoById(response['next_track_id']);
+    ytplayer.loadVideoById(response['next_youtube_id']);
+  });
+}
+
+function reloadTrackList() {
+  var urlStr = '/playlists/' + getPlaylistId() + '/track_list';
+  $.ajax({
+    url: urlStr
+  }).done(function(response) {
+    console.log('received updated track list');
   });
 }
 

@@ -1,0 +1,7 @@
+<ul>
+  <% tracks.each do |track| %>
+    <li>
+      <%= render 'remove_track', track: track, playlist: playlist %>
+    </li>
+  <% end %>
+</ul>
