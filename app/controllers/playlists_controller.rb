@@ -3,19 +3,23 @@ class PlaylistsController < ApplicationController
   def show
     @playlist = Playlist.find(params[:id])
     @tracks = Track.find_all_by_id(@playlist.tracks)
-    cookies[:playlist_ids] =
-      cookies[:playlist_ids].to_s.split(',').push(@playlist.id).join(',')
+    past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
+    unless past_playlist_ids.include?(@playlist.id.to_s)
+      cookies[:playlist_ids] = past_playlist_ids.push(@playlist.id).join(',')
+    end
   end
 
   def new
     @playlist = Playlist.new
     @past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
-    @past_playlists = Playlist.find(@past_playlist_ids)
+    @past_playlists = Playlist.find_all_by_id(@past_playlist_ids) || []
   end
 
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.tracks = []
+    @past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
+    @past_playlists = Playlist.find_all_by_id(@past_playlist_ids) || []
     if @playlist.save
       redirect_to playlist_path(@playlist)
     else
@@ -64,6 +68,10 @@ class PlaylistsController < ApplicationController
 
   def search
     @playlist = Playlist.find(params[:id])
+    past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
+    unless past_playlist_ids.include?(@playlist.id.to_s)
+      cookies[:playlist_ids] = past_playlist_ids.push(@playlist.id).join(',')
+    end
   end
 
   def next_track

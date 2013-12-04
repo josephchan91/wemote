@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
       @query = params[:search]
 
       client = Google::APIClient.new(
-        key: 'AIzaSyCzWkXtAFP97Vlevf1TVV_tXzD_CfZtt1g',
+        key: ENV["GOOGLE_API_KEY"],
         authorization: nil
       )
       youtube = client.discovered_api('youtube', 'v3')
@@ -33,7 +33,7 @@ class SearchesController < ApplicationController
         }
       )
     else
-      render "playlists/show"
+      redirect_to action: "search", controller: "playlists", id: @playlist.id
     end
   end
 end
