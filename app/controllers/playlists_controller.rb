@@ -3,23 +3,25 @@ class PlaylistsController < ApplicationController
   def show
     @playlist = Playlist.find(params[:id])
     @tracks = Track.find_all_by_id(@playlist.tracks)
-    past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
-    unless past_playlist_ids.include?(@playlist.id.to_s)
-      cookies[:playlist_ids] = past_playlist_ids.push(@playlist.id).join(',')
+    past_playlist_ids_played = cookies[:past_playlist_ids_played].to_s.split(',')
+    unless past_playlist_ids_played.include?(@playlist.id.to_s)
+      cookies[:past_playlist_ids_played] = past_playlist_ids_played.push(@playlist.id).join(',')
     end
   end
 
   def new
     @playlist = Playlist.new
-    @past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
-    @past_playlists = Playlist.find_all_by_id(@past_playlist_ids) || []
+    @past_playlists_played = get_past_playlists_played
+    @past_playlists_searched = get_past_playlists_searched
   end
 
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.tracks = []
-    @past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
-    @past_playlists = Playlist.find_all_by_id(@past_playlist_ids) || []
+
+    @past_playlists_played = get_past_playlists_played
+    @past_playlists_searched = get_past_playlists_searched
+
     if @playlist.save
       redirect_to playlist_path(@playlist)
     else
@@ -68,9 +70,9 @@ class PlaylistsController < ApplicationController
 
   def search
     @playlist = Playlist.find(params[:id])
-    past_playlist_ids = cookies[:playlist_ids].to_s.split(',')
-    unless past_playlist_ids.include?(@playlist.id.to_s)
-      cookies[:playlist_ids] = past_playlist_ids.push(@playlist.id).join(',')
+    past_playlist_ids_searched = cookies[:past_playlist_ids_searched].to_s.split(',')
+    unless past_playlist_ids_searched.include?(@playlist.id.to_s)
+      cookies[:past_playlist_ids_searched] = past_playlist_ids_searched.push(@playlist.id).join(',')
     end
   end
 
@@ -102,5 +104,15 @@ class PlaylistsController < ApplicationController
 
     def playlist_params
       params.require(:playlist).permit(:name)
+    end
+
+    def get_past_playlists_played
+      past_playlist_ids_played = cookies[:past_playlist_ids_played].to_s.split(',')
+      Playlist.find_all_by_id(past_playlist_ids_played) || []
+    end
+
+    def get_past_playlists_searched
+      past_playlist_ids_searched = cookies[:past_playlist_ids_searched].to_s.split(',')
+      Playlist.find_all_by_id(past_playlist_ids_searched) || []
     end
 end

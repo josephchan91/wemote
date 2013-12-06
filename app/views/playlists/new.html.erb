@@ -10,8 +10,13 @@
     <% end %>
   </div>
   <div class="large-4 columns">
-    <h6>Previous Playlists:</h6>
-    <% @past_playlists.each do |p| %>
+    <h6>Playlists you've hosted:</h6>
+    <% @past_playlists_played.each do |p| %>
+      <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %><br>
+    <% end %>
+    <br><br>
+    <h6>Playlists you've added music to:</h6>
+    <% @past_playlists_searched.each do |p| %>
       <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %><br>
     <% end %>
   </div>

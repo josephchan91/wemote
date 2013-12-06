@@ -6,6 +6,8 @@
   <div class="large-8 columns">
     <h4 class="color-primary"><%= @playlist.name %></h4>
 
+    <%= link_to "Add songs to this playlist!", search_playlist_path(@playlist.id) %><br>
+
     <b>Share this link with your friends:</b><br>
     <%= URI.join(root_url, search_playlist_path(@playlist.id)) %><br><br>
 
