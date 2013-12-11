@@ -17,7 +17,7 @@
     <br><br>
     <h6>Playlists you've added music to:</h6>
     <% @past_playlists_searched.each do |p| %>
-      <%= link_to p.name, playlist_path(p.id), "data-no-turbolink" => true %><br>
+      <%= link_to p.name, search_playlist_path(p.id), "data-no-turbolink" => true %><br>
     <% end %>
   </div>
 </div>
