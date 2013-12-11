@@ -1,28 +1,52 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+OVERVIEW
+Wemote is an app that lets guests in an event add songs to a shared playlist
+through their mobile browsers. This way, people don't have to walk over to the
+computer each time to put on a new song.
 
-Things you may want to cover:
+FUNCTIONALITY
+1. Create a playlist
+2. View previously created playlists
+3. Send playlist link to friends via email
+4. Search for songs
+5. Add songs to a playlist
+6. Remove inappropriate songs from a playlist
 
-* Ruby version
+PRETTY POINTS
+CSS used for all styling
+jQuery used for updating a tracklist dynamically (see track_list.js.erb)
 
-* System dependencies
+GEMS
+google-api-client
+I used this to make YouTube API calls.
+https://code.google.com/p/google-api-ruby-client/
 
-* Configuration
+zurb-foundation
+I used this to lay out my site.
+http://foundation.zurb.com/
 
-* Database creation
+Rspec, capybara, guard, spork for testing.
 
-* Database initialization
+pg (PostgreSQL)
+I used this instead of MySQL
+http://www.postgresql.org/
 
-* How to run the test suite
+ADDONS
+pusher
+https://devcenter.heroku.com/articles/pusher#triggering-events
 
-* Services (job queues, cache servers, search engines, etc.)
+DATABASE
+Resources: playlists, tracks
+I don't use belongs_to/has_many relationships because I've chosen to use PostgreSQL,
+which provides array data structures I use to store a playlists's list of tracks.
 
-* Deployment instructions
+VALIDATIONS
+See playlist.rb
 
-* ...
+SCOPE
+Scopes were not needed for my app, given the nature of my models.
 
+HEROKU LINK:
+warm-spire-9278.herokuapp.com
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
