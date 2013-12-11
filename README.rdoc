@@ -46,6 +46,8 @@ DATABASE
 Resources: playlists, tracks
 I don't use belongs_to/has_many relationships because I've chosen to use PostgreSQL,
 which provides array data structures I use to store a playlists's list of tracks.
+A playlist cannot be deleted. 
+A track can be deleted by clicking 'Remove' in the tracklist.
 
 VALIDATIONS
 
