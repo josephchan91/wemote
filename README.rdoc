@@ -45,7 +45,7 @@ VALIDATIONS
 See playlist.rb
 
 SCOPE
-Scopes were not needed for my app, given the nature of my models.
+non_empty scope for playlists that contain a track.
 
 HEROKU LINK:
 warm-spire-9278.herokuapp.com

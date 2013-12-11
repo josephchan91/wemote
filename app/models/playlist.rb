@@ -3,6 +3,8 @@ class Playlist < ActiveRecord::Base
   validates :tracks, presence: true,
     unless: Proc.new { |p| p.tracks != nil && p.tracks.empty? }
 
+  scope :non_empty, -> { where("tracks <> ''") }
+
   def push_track(track)
     tracks_will_change!
     update_attributes tracks: tracks.push(track.id)
