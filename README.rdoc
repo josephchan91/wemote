@@ -1,11 +1,13 @@
 == README
 
 OVERVIEW
+
 Wemote is an app that lets guests in an event add songs to a shared playlist
 through their mobile browsers. This way, people don't have to walk over to the
 computer each time to put on a new song.
 
 FUNCTIONALITY
+
 1. Create a playlist
 2. View previously created playlists
 3. Send playlist link to friends via email
@@ -14,10 +16,12 @@ FUNCTIONALITY
 6. Remove inappropriate songs from a playlist
 
 PRETTY POINTS
+
 CSS used for all styling
 jQuery used for updating a tracklist dynamically (see track_list.js.erb)
 
 GEMS
+
 google-api-client
 I used this to make YouTube API calls.
 https://code.google.com/p/google-api-ruby-client/
@@ -33,20 +37,25 @@ I used this instead of MySQL
 http://www.postgresql.org/
 
 ADDONS
+
 pusher
 https://devcenter.heroku.com/articles/pusher#triggering-events
 
 DATABASE
+
 Resources: playlists, tracks
 I don't use belongs_to/has_many relationships because I've chosen to use PostgreSQL,
 which provides array data structures I use to store a playlists's list of tracks.
 
 VALIDATIONS
+
 See playlist.rb
 
 SCOPE
+
 non_empty scope for playlists that contain a track.
 
-HEROKU LINK:
+HEROKU LINK
+
 warm-spire-9278.herokuapp.com
 
